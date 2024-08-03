@@ -7,39 +7,40 @@ dotenv.config();
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 const request = async (url) => {
-	const response = await axios.get(url, {
-		headers: {
-			'Authorization': `token ${GITHUB_TOKEN}`
-		}
-	}
-	);
-	return response.data;
+   const response = await axios.get(url, {
+      headers: {
+         Authorization: `token ${GITHUB_TOKEN}`,
+      },
+   });
+   return response.data;
 };
 
 const parseUrls = async () => {
-	const urls = {};
-	const audio_db = await request("https://api.github.com/repos/Frintest/dungeon-rap-archive/contents");
-	let songNumber = 0;
+   const urls = {};
+   const audio_db = await request(
+      "https://api.github.com/repos/Frintest/finikers-archive/contents",
+   );
+   let songNumber = 0;
 
-	for (const artist of audio_db) {
-		if (artist.type === "dir") {
-			const playlists = await request(artist.url);
-			for (const playlist of playlists) {
-				const songs = await request(playlist.url);
-				for (const song of songs) {
-					urls[songNumber] = song.download_url; // или заменить blob на raw
-					songNumber++;
-				}
-			}
-		}
-	}
+   for (const artist of audio_db) {
+      if (artist.type === "dir") {
+         const playlists = await request(artist.url);
+         for (const playlist of playlists) {
+            const songs = await request(playlist.url);
+            for (const song of songs) {
+               urls[songNumber] = song.download_url; // или заменить blob на raw
+               songNumber++;
+            }
+         }
+      }
+   }
 
-	return urls;
+   return urls;
 };
 
 (async () => {
-	const urls = await parseUrls();
-	const urls_json = JSON.stringify(urls);
-	const file_name = "urls.json";
-	await fs.writeFile(file_name, urls_json);
+   const urls = await parseUrls();
+   const urls_json = JSON.stringify(urls);
+   const file_name = "urls.json";
+   await fs.writeFile(file_name, urls_json);
 })();
