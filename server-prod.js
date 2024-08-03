@@ -12,6 +12,7 @@ app.use(cors({
 		"https://frintest.github.io"
 	]
 }));
+app.use(express.json());
 
 const directory = `/etc/letsencrypt/live/airmonitor.servermc.ru-0001`;
 const ssl = {
@@ -21,9 +22,7 @@ const ssl = {
 
 const httpsServer = https.createServer(ssl, app);
 
-app.use(express.json());
-
-app.post("/song", (req, res) => {
+app.get("/song", (req, res) => {
 	const songUrl = getSongUrl();
 	res.json(songUrl);
 });
