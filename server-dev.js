@@ -13,7 +13,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.post("/song", (req, res) => {
+app.get("/song", (req, res) => {
 	const songUrl = getSongUrl();
 	res.json(songUrl);
 });
