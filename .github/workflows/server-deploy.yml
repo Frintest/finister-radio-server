@@ -15,7 +15,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /var/www/finikers-radio
-            # git pull
+            cd /var/www/finister-radio
             mkdir test
             exit
