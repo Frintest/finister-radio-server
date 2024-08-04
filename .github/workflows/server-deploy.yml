@@ -1,7 +1,8 @@
 name: Server Deploy
 on:
   push:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
   deploy-job:
@@ -16,9 +17,8 @@ jobs:
           port: ${{ secrets.PORT }}
 
       - name: git sync
-        with:
-          script: |
-            cd /var/www/finister-radio/server
-            git pull origin master
-            ${{ secrets.SSH_PASSWORD }}
-            exit
+        run: |
+          cd /var/www/finister-radio/server
+          git pull origin master
+          ${{ secrets.SSH_PASSWORD }}
+          exit
