@@ -19,5 +19,5 @@ jobs:
             cd ${{ secrets.PATH }}
             git pull origin master
             npm i
-            pm2 restart src/server-prod.js
+            pm2 restart server-prod.js
             exit
