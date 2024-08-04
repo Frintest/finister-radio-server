@@ -18,5 +18,6 @@ jobs:
           script: |
             cd /var/www/finister-radio/server
             git pull origin master
-            ${{ secrets.SSH_PASSWORD }}
+            npm i
+            pm2 start ../server-prod.js
             exit
