@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "parse": "node parser-script.js",
-    "dev": "node server-dev.js",
-    "prod": "node server-prod.js",
+    "parse": "node ./src/parser-script.js",
+    "dev": "node ./src/server-dev.js",
+    "prod": "node ./src/server-prod.js",
     "prettier": "npx prettier . --write",
     "prettier-check": "npx prettier . --check"
   },
