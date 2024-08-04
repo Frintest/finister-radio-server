@@ -16,5 +16,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /var/www/finister-radio
-            git pull ${{ secrets.SSH_PASSWORD }}
+            git pull
+            ${{ secrets.SSH_PASSWORD }}
             exit
