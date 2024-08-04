@@ -19,6 +19,5 @@ jobs:
             cd /var/www/finister-radio/server
             git pull origin master
             npm i
+            pm2 start ../../server-prod.js
             exit
-
-# pm2 start ../server-prod.js
