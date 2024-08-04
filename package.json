@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "parse": "node parser-script.js",
     "dev": "node server-dev.js",
     "prod": "node server-prod.js",
     "prettier": "npx prettier . --write",
