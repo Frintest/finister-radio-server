@@ -15,10 +15,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-
-      - name: git sync
-        run: |
-          cd /var/www/finister-radio/server
-          git pull origin master
-          ${{ secrets.SSH_PASSWORD }}
-          exit
+          script: |
+            cd /var/www/finister-radio/server
+            git pull origin master
+            ${{ secrets.SSH_PASSWORD }}
+            exit
