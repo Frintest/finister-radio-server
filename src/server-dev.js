@@ -1,7 +1,7 @@
 const http = require("http");
 const express = require("express");
 const cors = require("cors");
-const { getSongUrl } = require("./get-audio-urls.js");
+const { main } = require("main");
 
 const PORT = 3002;
 const app = express();
@@ -13,10 +13,7 @@ app.use(
 );
 app.use(express.json());
 
-app.get("/song", (req, res) => {
-   const songUrl = getSongUrl();
-   res.json(songUrl);
-});
+main(app);
 
 const httpServer = http.createServer(app);
 

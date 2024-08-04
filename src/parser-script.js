@@ -1,11 +1,11 @@
+const dotenv = require("dotenv");
 const axios = require("axios");
 const fs = require("fs").promises;
-const dotenv = require("dotenv");
 
 dotenv.config();
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const AUDIO_ARCHIVE_URL = process.env.AUDIO_ARCHIVE_URL;
+const AUDIO_ARCHIVE = process.env.AUDIO_ARCHIVE;
 
 const request = async (url) => {
    const response = await axios.get(url, {
@@ -16,30 +16,34 @@ const request = async (url) => {
    return response.data;
 };
 
-const parseUrls = async () => {
-   const urls = {};
-   const audio_db = await request(AUDIO_ARCHIVE_URL);
-   let songNumber = 0;
+const parseAudio = async () => {
+   const audioData = {};
+   const audioRaw = await request(AUDIO_ARCHIVE);
 
-   for (const artist of audio_db) {
-      if (artist.type === "dir") {
-         const playlists = await request(artist.url);
+   for (const author of audioRaw) {
+      if (author.type === "dir") {
+         const playlists = await request(author.url);
+         const authorName = author.name;
+         audioData[authorName] = {};
+
          for (const playlist of playlists) {
             const songs = await request(playlist.url);
+            let songNumber = 0;
+
             for (const song of songs) {
-               urls[songNumber] = song.download_url; // или заменить blob на raw
+               audioData[authorName][songNumber] = song.download_url; // или заменить blob на raw
                songNumber++;
             }
          }
       }
    }
 
-   return urls;
+   return audioData;
 };
 
 (async () => {
-   const urls = await parseUrls();
-   const urls_json = JSON.stringify(urls);
-   const file_name = "urls.json";
-   await fs.writeFile(file_name, urls_json);
+   const audioData = await parseAudio();
+   const audioJSON = JSON.stringify(audioData);
+   const file = "urls.json";
+   await fs.writeFile(file, audioJSON);
 })();

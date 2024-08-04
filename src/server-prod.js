@@ -2,7 +2,7 @@ const fs = require("fs");
 const https = require("https");
 const express = require("express");
 const cors = require("cors");
-const { getSongUrl } = require("./get-audio-urls.js");
+const { main } = require("main");
 
 const PORT = 3002;
 const app = express();
@@ -20,12 +20,9 @@ const ssl = {
    cert: fs.readFileSync(`${directory}/fullchain.pem`),
 };
 
-const httpsServer = https.createServer(ssl, app);
+main(app);
 
-app.get("/song", (req, res) => {
-   const songUrl = getSongUrl();
-   res.json(songUrl);
-});
+const httpsServer = https.createServer(ssl, app);
 
 httpsServer.listen(PORT, () => {
    console.log(`Server is running on port ${PORT}`);
