@@ -1,7 +1,7 @@
 const http = require("http");
 const express = require("express");
 const cors = require("cors");
-const { main } = require("main");
+const { main } = require("./index.js");
 
 const PORT = 3002;
 const app = express();

@@ -1,20 +1,36 @@
 const fs = require("fs");
 
-const getAudioUrls = () => {
-   const file_name = "urls.json";
-   const data = fs.readFileSync(file_name).toString();
-   const urls_data = JSON.parse(data);
-   return urls_data;
+const getAudioData = () => {
+   const file = "urls.json";
+   const audioData = fs.readFileSync(file).toString();
+   const audioDataRaw = JSON.parse(audioData);
+   return audioDataRaw;
 };
 
-const getSongUrl = () => {
-   const urls = getAudioUrls();
-   const songsCount = Object.keys(urls).length;
+const getSongData = () => {
+   const audioData = getAudioData();
+
+   const authors = Object.keys(audioData);
+   const authorsCount = Object.keys(authors).length;
+   const authorNumber = Math.floor(Math.random() * authorsCount);
+   const authorName = authors[authorNumber];
+   const author = audioData[authorName];
+
+   const songsCount = author.length;
    const songNumber = Math.floor(Math.random() * songsCount);
-   const songUrl = urls[songNumber];
-   return songUrl;
+   const song = author[songNumber];
+   const songName = song.name;
+   const songSrc = song.src;
+
+   const songData = {
+      songName,
+      songSrc,
+      authorName,
+   };
+
+   return songData;
 };
 
 module.exports = {
-   getSongUrl,
+   getSongData,
 };
