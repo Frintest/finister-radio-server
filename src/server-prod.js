@@ -1,5 +1,5 @@
 import https from "https";
-import * as express from "express";
+import express from "express";
 import { Server } from "socket.io";
 import fs from "fs";
 import { audioSocketHandler } from "./socket-handlers/audio.js";
