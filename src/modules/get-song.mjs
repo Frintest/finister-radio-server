@@ -1,4 +1,4 @@
-import { getAudioData } from "./get-audio-data.js";
+import { getAudioData } from "./get-audio-data.mjs";
 
 export const getSong = async () => {
    const songs = await getAudioData("./audio-data/songs.json");

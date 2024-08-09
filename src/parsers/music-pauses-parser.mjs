@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { request } from "./github-request.js";
+import { request } from "./github-request.mjs";
 import { promises as fs } from "fs";
 
 dotenv.config();

@@ -1,4 +1,4 @@
-import { emulateStream } from "../modules/emulate-stream.js";
+import { emulateStream } from "../modules/emulate-stream.mjs";
 
 export const audioSocketHandler = (socket) => {
    let audioCache = {

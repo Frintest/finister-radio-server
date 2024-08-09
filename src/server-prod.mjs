@@ -1,8 +1,8 @@
 import https from "https";
-import express from "express";
+import * as express from "express";
 import { Server } from "socket.io";
 import fs from "fs";
-import { audioSocketHandler } from "./socket-handlers/audio.js";
+import { audioSocketHandler } from "./socket-handlers/audio.mjs";
 
 const PORT = 3002;
 const app = express();

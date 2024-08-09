@@ -1,7 +1,7 @@
 import http from "http";
 import express from "express";
 import { Server } from "socket.io";
-import { audioSocketHandler } from "./socket-handlers/audio.js";
+import { audioSocketHandler } from "./socket-handlers/audio.mjs";
 
 const PORT = 3002;
 const app = express();
