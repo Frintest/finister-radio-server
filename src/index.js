@@ -1,13 +1,11 @@
-const { getSongData } = require("./get-audio-urls.js");
+import { emulateStream } from "./modules/emulate-stream.js";
 
-const main = (app) => {
-   app.get("/song", (req, res) => {
-      const songData = getSongData();
-      const songDataJSON = JSON.stringify(songData);
-      res.json(songDataJSON);
-   });
+export const main = async () => {
+	app.get("/audio", async (req, res) => {
+		const audio = await emulateStream();
+		const audioJSON = JSON.stringify(audio);
+		res.json(audioJSON);
+	});
 };
 
-module.exports = {
-   main,
-};
+await main();

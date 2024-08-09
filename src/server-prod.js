@@ -1,8 +1,8 @@
-const fs = require("fs");
-const https = require("https");
-const express = require("express");
-const cors = require("cors");
-const { main } = require("./index.js");
+import fs from "fs";
+import https from "https";
+import express from "express";
+import cors from "cors";
+import { main } from "./index.js";
 
 const PORT = 3002;
 const app = express();

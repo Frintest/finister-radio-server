@@ -1,7 +1,7 @@
-const http = require("http");
-const express = require("express");
-const cors = require("cors");
-const { main } = require("./index.js");
+import http from "http";
+import express from "express";
+import cors from "cors";
+import { main } from "./index.js";
 
 const PORT = 3002;
 const app = express();
