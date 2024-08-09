@@ -1,5 +1,5 @@
-import { getSong } from "./get-song.mjs";
-import { getMusicPause } from "./get-music-pause.mjs";
+import { getSong } from "./get-song.js";
+import { getMusicPause } from "./get-music-pause.js";
 import Audic from "audic";
 import got from "got";
 import { parseStream } from "music-metadata";

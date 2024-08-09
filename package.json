@@ -4,10 +4,10 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "node ./src/server-dev.mjs",
-    "prod": "node ./src/server-prod.mjs",
-    "songs-parse": "node ./src/parsers/songs-parser.mjs",
-    "music-pauses-parse": "node ./src/parsers/music-pauses-parser.mjs",
+    "dev": "node ./src/server-dev.js",
+    "prod": "node ./src/server-prod.js",
+    "songs-parse": "node ./src/parsers/songs-parser.js",
+    "music-pauses-parse": "node ./src/parsers/music-pauses-parser.js",
     "prettier": "npx prettier . --write",
     "prettier-check": "npx prettier . --check"
   },
