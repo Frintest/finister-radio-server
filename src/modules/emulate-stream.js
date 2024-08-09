@@ -30,6 +30,7 @@ export const emulateStream = async () => {
       // endingTime = await requestDuration(url);
       endingTime = 3;
       audio = new Audic(url);
+      audio.volume = 0;
       audio.play();
       isUpdateSong = false;
       console.log("Request song");
@@ -41,6 +42,7 @@ export const emulateStream = async () => {
       // endingTime = await requestDuration(url);
       endingTime = 3;
       audio = new Audic(url);
+      audio.volume = 0;
       audio.play();
       isUpdateMusicPause = false;
       console.log("Request music pause");
