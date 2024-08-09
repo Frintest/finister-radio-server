@@ -18,6 +18,6 @@ jobs:
           script: |
             cd /var/www/finister-radio/server
             git pull origin master
-            npm install
+            npm i
             pm2 restart ./src/server-prod.js
             exit
