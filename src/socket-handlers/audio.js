@@ -16,5 +16,5 @@ export const audioSocketHandler = (socket) => {
             console.log("Socket.emit | audio:request");
          });
       }
-   }, 1000);
+   }, 500);
 };
