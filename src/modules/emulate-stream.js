@@ -24,9 +24,9 @@ const sleep = async (duration) => {
    const timeDiff = 0.5;
    const tickCount = Math.ceil(duration / timeDiff);
 
-   for (let i = 0; i < tickCount; i++) {
-      updateCurrentTime(timeDiff);
+   for (let i = 0; i <= tickCount; i++) {
       await sleepTick(timeDiff);
+      updateCurrentTime(timeDiff);
    }
 };
 
@@ -37,13 +37,16 @@ const requestDuration = async (url) => {
    return duration;
 };
 
-export const returnAudioData = () => ({
+export const getAudioData = () => ({
    url,
    name,
    authorName,
-   currentTime,
    endingTime,
 });
+
+export const getCurrentTime = () => {
+   return currentTime;
+};
 
 const emulateStream = async () => {
    if (isSong) {
@@ -52,7 +55,8 @@ const emulateStream = async () => {
       name = songData.name;
       authorName = songData.authorName;
       currentTime = 0;
-      endingTime = 3;
+      // endingTime = 10;
+      endingTime = await requestDuration(url);
       isSong = false;
       console.log("\nRequest song");
    } else {
@@ -61,7 +65,8 @@ const emulateStream = async () => {
       name = musicPauseData.name;
       authorName = musicPauseData.authorName;
       currentTime = 0;
-      endingTime = 3;
+      // endingTime = 10;
+      endingTime = await requestDuration(url);
       isSong = true;
       console.log("\nRequest music pause");
    }
