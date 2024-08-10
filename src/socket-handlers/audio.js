@@ -10,7 +10,6 @@ export const audioSocketHandler = async (socket) => {
 
    while (true) {
       const audio = await emulateStream();
-
       if (audioCache.url !== audio.url) {
          audioCache = audio;
          socket.emit("audio:request", audioCache, () => {
