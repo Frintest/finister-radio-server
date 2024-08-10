@@ -7,7 +7,28 @@ let isSong = true;
 let url = "";
 let name = "";
 let authorName = "";
+let currentTime = 0;
 let endingTime = 0;
+
+const updateCurrentTime = (timeDiff) => {
+   console.log(currentTime);
+   currentTime += timeDiff;
+};
+
+const sleepTick = (duration) => {
+   const msDuration = duration * 1000;
+   return new Promise((resolve) => setTimeout(resolve, msDuration));
+};
+
+const sleep = async (duration) => {
+   const timeDiff = 0.5;
+   const tickCount = Math.ceil(duration / timeDiff);
+
+   for (let i = 0; i < tickCount; i++) {
+      updateCurrentTime(timeDiff);
+      await sleepTick(timeDiff);
+   }
+};
 
 const requestDuration = async (url) => {
    const response = got.stream(url);
@@ -16,35 +37,40 @@ const requestDuration = async (url) => {
    return duration;
 };
 
-const sleep = (duration) => {
-   const msDuration = duration * 1000;
-   return new Promise((resolve) => setTimeout(resolve, msDuration));
-};
+export const returnAudioData = () => ({
+   url,
+   name,
+   authorName,
+   currentTime,
+   endingTime,
+});
 
-export const emulateStream = async () => {
-   await sleep(endingTime);
+const emulateStream = async () => {
    if (isSong) {
       const songData = await getSong();
       url = songData.url;
       name = songData.name;
       authorName = songData.authorName;
+      currentTime = 0;
       endingTime = 3;
       isSong = false;
-      console.log("Request song");
+      console.log("\nRequest song");
    } else {
       const musicPauseData = await getMusicPause();
       url = musicPauseData.url;
       name = musicPauseData.name;
       authorName = musicPauseData.authorName;
+      currentTime = 0;
       endingTime = 3;
       isSong = true;
-      console.log("Request music pause");
+      console.log("\nRequest music pause");
    }
-
-   return {
-      url,
-      name,
-      authorName,
-      endingTime,
-   };
 };
+
+const runEmulateStream = async () => {
+   await emulateStream();
+   await sleep(endingTime);
+   runEmulateStream();
+};
+
+runEmulateStream();

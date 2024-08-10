@@ -2,11 +2,9 @@ import https from "https";
 import express from "express";
 import { Server } from "socket.io";
 import fs from "fs";
-import { audioSocketHandler } from "./socket-handlers/audio.js";
+import { main } from "./main.js";
 
-const PORT = 3002;
 const app = express();
-
 const directory = `/etc/letsencrypt/live/airmonitor.servermc.ru-0001`;
 const ssl = {
    key: fs.readFileSync(`${directory}/privkey.pem`),
@@ -20,12 +18,9 @@ const io = new Server(httpsServer, {
    },
 });
 
-const onConnection = async (socket) => {
-   audioSocketHandler(socket);
-};
+main(io);
 
-io.on("connection", onConnection);
-
+const PORT = 3002;
 httpsServer.listen(PORT, () => {
    console.log(`Server is running on port ${PORT}`);
 });

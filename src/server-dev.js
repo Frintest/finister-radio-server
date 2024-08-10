@@ -1,11 +1,9 @@
 import http from "http";
 import express from "express";
 import { Server } from "socket.io";
-import { audioSocketHandler } from "./socket-handlers/audio.js";
+import { main } from "./main.js";
 
-const PORT = 3002;
 const app = express();
-
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
    cors: {
@@ -13,12 +11,9 @@ const io = new Server(httpServer, {
    },
 });
 
-const onConnection = async (socket) => {
-   audioSocketHandler(socket);
-};
+main(io);
 
-io.on("connection", onConnection);
-
+const PORT = 3002;
 httpServer.listen(PORT, () => {
    console.log(`Server is running on port ${PORT}`);
 });

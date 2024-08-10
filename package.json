@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "node ./src/server-dev.js",
+    "dev": "node ./src/server-dev.js ",
     "prod": "node ./src/server-prod.js",
     "songs-parse": "node ./src/parsers/songs-parser.js",
     "music-pauses-parse": "node ./src/parsers/music-pauses-parser.js",
