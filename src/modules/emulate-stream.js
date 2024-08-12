@@ -21,7 +21,7 @@ const sleepTick = (duration) => {
 };
 
 const sleep = async (duration) => {
-   const timeDiff = 0.5;
+   const timeDiff = 1; // seconds
    const tickCount = Math.ceil(duration / timeDiff);
 
    for (let i = 0; i <= tickCount; i++) {
