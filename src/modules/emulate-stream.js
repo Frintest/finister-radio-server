@@ -66,6 +66,7 @@ const emulateStream = async () => {
       authorName = musicPauseData.authorName;
       currentTime = 0;
       // endingTime = 10;
+		
       endingTime = await requestDuration(url);
       isSong = true;
       console.log("\nRequest music pause");
