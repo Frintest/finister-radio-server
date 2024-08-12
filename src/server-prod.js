@@ -1,17 +1,16 @@
-import https from "https";
-import express from "express";
+import { readFileSync } from "fs";
+import { createServer } from "https";
 import { Server } from "socket.io";
+import dotenv from "dotenv";
 import { main } from "./main.js";
-import fs from "fs";
 
-const app = express();
 const directory = `/etc/letsencrypt/live/airmonitor.servermc.ru-0001`;
 const ssl = {
-   key: fs.readFileSync(`${directory}/privkey.pem`),
-   cert: fs.readFileSync(`${directory}/fullchain.pem`),
+   key: readFileSync(`${directory}/privkey.pem`),
+   cert: readFileSync(`${directory}/fullchain.pem`),
 };
 
-const httpsServer = https.createServer(ssl, app);
+const httpsServer = createServer(ssl);
 const io = new Server(httpsServer, {
    cors: {
       origin: ["https://frintest.github.io"],
@@ -20,7 +19,8 @@ const io = new Server(httpsServer, {
 
 main(io);
 
-const PORT = 3002;
+dotenv.config();
+const PORT = process.env.APP_PORT;
 httpsServer.listen(PORT, () => {
    console.log(`Server is running on port ${PORT}`);
 });
