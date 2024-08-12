@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-
 jobs:
   deploy-job:
     runs-on: ubuntu-latest
@@ -19,5 +18,5 @@ jobs:
             cd /var/www/finister-radio/server
             git pull origin master
             npm i
-            pm2 restart ./src/server-prod.js
+            pm2 start ./src/server-prod.js --name finister-radio
             exit
