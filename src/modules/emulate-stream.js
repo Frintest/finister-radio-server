@@ -75,7 +75,7 @@ const emulateStream = async () => {
 const runEmulateStream = async () => {
 	await emulateStream();
 	await sleep(endingTime);
-	await runEmulateStream();
+	runEmulateStream();
 };
 
-await runEmulateStream();
+runEmulateStream();
