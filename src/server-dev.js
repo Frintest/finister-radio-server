@@ -13,7 +13,7 @@ const io = new Server(httpServer, {
 main(io);
 
 dotenv.config();
-const PORT = process.env.APP_PORT;
-httpServer.listen(PORT, () => {
-   console.log(`Server is running on port ${PORT}`);
+const SERVER_PORT = process.env.SERVER_PORT;
+httpServer.listen(SERVER_PORT, () => {
+   console.log(`Server is running on port ${SERVER_PORT}`);
 });

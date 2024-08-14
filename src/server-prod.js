@@ -20,7 +20,7 @@ const io = new Server(httpsServer, {
 main(io);
 
 dotenv.config();
-const PORT = process.env.APP_PORT;
-httpsServer.listen(PORT, () => {
-   console.log(`Server is running on port ${PORT}`);
+const SERVER_PORT = process.env.SERVER_PORT;
+httpsServer.listen(SERVER_PORT, () => {
+   console.log(`Server is running on port ${SERVER_PORT}`);
 });
