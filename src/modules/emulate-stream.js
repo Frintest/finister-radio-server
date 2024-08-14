@@ -11,7 +11,7 @@ let currentTime = 0;
 let endingTime = 0;
 
 const updateCurrentTime = (timeDiff) => {
-	// console.log(currentTime);
+	console.log(`${currentTime} second`);
 	currentTime += timeDiff;
 };
 
@@ -34,6 +34,7 @@ const requestDuration = async (url) => {
 	const response = got.stream(url);
 	const metadata = await parseStream(response);
 	const duration = Math.floor(metadata.format.duration);
+	response.destroy();
 	return duration;
 };
 
@@ -50,6 +51,7 @@ export const getCurrentTime = () => {
 
 const emulateStream = async () => {
 	if (isSong) {
+		console.log("\nRequest song");
 		const songData = await getSong();
 		url = songData.url;
 		name = songData.name;
@@ -58,8 +60,10 @@ const emulateStream = async () => {
 		// endingTime = 10;
 		endingTime = await requestDuration(url);
 		isSong = false;
-		// console.log("\nRequest song");
+		console.log(`Playing audio: ${name}`);
+		console.log(`Duraction: ${endingTime} seconds`);
 	} else {
+		console.log("\nRequest music pause");
 		const musicPauseData = await getMusicPause();
 		url = musicPauseData.url;
 		name = musicPauseData.name;
@@ -68,14 +72,14 @@ const emulateStream = async () => {
 		// endingTime = 10;
 		endingTime = await requestDuration(url);
 		isSong = true;
-		// console.log("\nRequest music pause");
+		console.log(`Playing ${name}`);
+		console.log(`Duraction: ${endingTime} seconds`);
 	}
 };
 
-const runEmulateStream = async () => {
-	await emulateStream();
-	await sleep(endingTime);
-	runEmulateStream();
+export const runEmulateStream = async () => {
+	while (true) {
+		await emulateStream();
+		await sleep(endingTime);
+	}
 };
-
-runEmulateStream();

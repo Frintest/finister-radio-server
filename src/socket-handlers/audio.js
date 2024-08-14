@@ -19,13 +19,14 @@ export const audioSocketHandler = async (socket) => {
 		socket.emit("current-time:request", currentTime);
 	});
 
-	const sleep = () => {
-		return new Promise((resolve) => setTimeout(resolve, 1000));
+	const sleep = (duration) => {
+		return new Promise((resolve) => setTimeout(resolve, duration));
 	};
 
+	const sleepDuration = 1000;
 	while (isSocketConnect) {
 		const audio = getAudioData();
-		await sleep();
+		await sleep(sleepDuration);
 
 		if (audioCache.url !== audio.url) {
 			audioCache = audio;
