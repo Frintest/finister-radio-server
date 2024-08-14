@@ -1,9 +1,9 @@
 import { audioSocketHandler } from "./socket-handlers/audio.js";
 
 export const main = (io) => {
-   const onConnection = (socket) => {
-      audioSocketHandler(socket);
-   };
+	const onConnection = (socket) => {
+		audioSocketHandler(socket);
+	};
 
-   io.on("connection", onConnection);
+	io.on("connection", onConnection);
 };

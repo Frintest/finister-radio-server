@@ -1,35 +1,35 @@
 import { getAudioData, getCurrentTime } from "../modules/emulate-stream.js";
 
 export const audioSocketHandler = async (socket) => {
-   let isSocketConnect = true;
-   let audioCache = {
-      url: "",
-      name: "",
-      authorName: "",
-      currentTime: 0,
-      endingTime: 0,
-   };
+	let isSocketConnect = true;
+	let audioCache = {
+		url: "",
+		name: "",
+		authorName: "",
+		currentTime: 0,
+		endingTime: 0,
+	};
 
-   socket.on("disconnect", () => {
-      isSocketConnect = false;
-   });
+	socket.on("disconnect", () => {
+		isSocketConnect = false;
+	});
 
-   socket.on("current-time-trigger:send", () => {
-      const currentTime = getCurrentTime();
-      socket.emit("current-time:request", currentTime);
-   });
+	socket.on("current-time-trigger:send", () => {
+		const currentTime = getCurrentTime();
+		socket.emit("current-time:request", currentTime);
+	});
 
-   const sleep = () => {
-      return new Promise((resolve) => setTimeout(resolve, 1000));
-   };
+	const sleep = () => {
+		return new Promise((resolve) => setTimeout(resolve, 1000));
+	};
 
-   while (isSocketConnect) {
-      const audio = getAudioData();
-      await sleep();
+	while (isSocketConnect) {
+		const audio = getAudioData();
+		await sleep();
 
-      if (audioCache.url !== audio.url) {
-         audioCache = audio;
-         socket.emit("audio:request", audioCache);
-      }
-   }
+		if (audioCache.url !== audio.url) {
+			audioCache = audio;
+			socket.emit("audio:request", audioCache);
+		}
+	}
 };
