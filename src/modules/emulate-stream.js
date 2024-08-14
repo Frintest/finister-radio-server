@@ -11,7 +11,7 @@ let currentTime = 0;
 let endingTime = 0;
 
 const updateCurrentTime = (timeDiff) => {
-   console.log(currentTime);
+   // console.log(currentTime);
    currentTime += timeDiff;
 };
 
@@ -58,7 +58,7 @@ const emulateStream = async () => {
       // endingTime = 10;
       endingTime = await requestDuration(url);
       isSong = false;
-      console.log("\nRequest song");
+      // console.log("\nRequest song");
    } else {
       const musicPauseData = await getMusicPause();
       url = musicPauseData.url;
@@ -66,10 +66,9 @@ const emulateStream = async () => {
       authorName = musicPauseData.authorName;
       currentTime = 0;
       // endingTime = 10;
-
       endingTime = await requestDuration(url);
       isSong = true;
-      console.log("\nRequest music pause");
+      // console.log("\nRequest music pause");
    }
 };
 

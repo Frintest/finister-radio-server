@@ -26,8 +26,6 @@ export const audioSocketHandler = async (socket) => {
    while (isSocketConnect) {
       const audio = getAudioData();
       await sleep();
-      // console.log("socket id:", socket.id);
-      // console.log("audio name:", audio.name);
 
       if (audioCache.url !== audio.url) {
          audioCache = audio;
