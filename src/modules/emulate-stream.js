@@ -51,7 +51,6 @@ export const getCurrentTime = () => {
 
 const emulateStream = async () => {
 	if (isSong) {
-		console.log("\nRequest song");
 		const songData = await getSong();
 		url = songData.url;
 		name = songData.name;
@@ -60,10 +59,9 @@ const emulateStream = async () => {
 		// endingTime = 10;
 		endingTime = await requestDuration(url);
 		isSong = false;
-		console.log(`Playing audio: ${name}`);
+		console.log(`\nPlaying audio: ${name}`);
 		console.log(`Duraction: ${endingTime} seconds`);
 	} else {
-		console.log("\nRequest music pause");
 		const musicPauseData = await getMusicPause();
 		url = musicPauseData.url;
 		name = musicPauseData.name;
@@ -72,7 +70,7 @@ const emulateStream = async () => {
 		// endingTime = 10;
 		endingTime = await requestDuration(url);
 		isSong = true;
-		console.log(`Playing ${name}`);
+		console.log(`\nPlaying ${name}`);
 		console.log(`Duraction: ${endingTime} seconds`);
 	}
 };
